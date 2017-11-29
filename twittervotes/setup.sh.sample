@@ -1,0 +1,5 @@
+#!/bin/bash
+export SP_TWITTER_KEY=hoge
+export SP_TWITTER_SECRET=fuga
+export SP_TWITTER_ACCESSTOKEN=piyo
+export SP_TWITTER_ACCESSSECRET=hogehoge
