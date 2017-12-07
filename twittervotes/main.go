@@ -2,6 +2,7 @@ package main
 
 import mgo "gopkg.in/mgo.v2"
 import "log"
+import "github.com/bitly/go-nsq"
 
 func main() {
 
@@ -15,6 +16,7 @@ func dialdb() error {
 	db, err = mgo.Dial("localhost")
 	return err
 }
+
 func closedb() {
 	db.Close()
 	log.Println("データベース接続が閉じられました")
@@ -33,4 +35,20 @@ func loadOptions() ([]string, error) {
 	}
 	iter.Close()
 	return options, iter.Err()
+}
+
+func publishVotes(votes <-chan string) <-chan struct{} {
+	stopchan := make(chan struct{}, 1)
+	pub, _ := nsq.NewProducer("localhost:4150", nsq.NewConfig())
+	go func() {
+		for vote := range votes {
+			// 投票内容をパブリッシュします
+			pub.Publish("votes", []byte(vote))
+		}
+		log.Println("Publisher: 停止中です")
+		pub.Stop()
+		log.Println("Publisher: 停止しました")
+		stopchan <- struct{}{}
+	}()
+	return stopchan
 }
