@@ -28,7 +28,7 @@ func main() {
 	}()
 	signal.Notify(signalChan, syscall.SIGINT, syscall.SIGTERM)
 
-	if err := dialdb; err != nil {
+	if err := dialdb(); err != nil {
 		log.Fatalln("MongDBへのダイヤルに失敗しました: ", err)
 	}
 	defer closedb()
