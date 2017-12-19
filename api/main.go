@@ -1,6 +1,7 @@
 package main
 
 import "net/http"
+import "gopkg.in/mgo.v2"
 
 func main() {
 
@@ -13,6 +14,15 @@ func withAPIKey(fn http.HandlerFunc) http.HandlerFunc {
 			return
 		}
 		fn(w, r)
+	}
+}
+
+func withData(d *mgo.Session, f http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		thisDb := d.Copy()
+		defer thisDb.Close()
+		SetVar(r, "db", thisDb.DB("ballots"))
+		f(w, r)
 	}
 }
 
