@@ -34,6 +34,14 @@ func withVars(fn http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func withCORS(fn http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Expose-Headers", "Location")
+		fn(w, r)
+	}
+}
+
 func isValidAPIKey(key string) bool {
 	return key == "abc123"
 }
