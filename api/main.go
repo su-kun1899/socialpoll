@@ -45,7 +45,3 @@ func withCORS(fn http.HandlerFunc) http.HandlerFunc {
 func isValidAPIKey(key string) bool {
 	return key == "abc123"
 }
-
-func respondErr(w http.ResponseWriter, r *http.Request, status int, args ...interface{}) {
-
-}
