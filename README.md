@@ -9,6 +9,20 @@
 /polls/{id}
 ```
 
+### Create
+
+`curl --data '{"title":"調査のテスト","options":["one","two","three"]}' -X POST http://localhost:8080/polls/?key=abc123`
+
+### Read
+
+
+`curl -X GET http://localhost:8080/polls/?key=abc123`
+`curl -X GET http://localhost:8080/polls/5a4af686f58b79cb94162193?key=abc123`
+
+### Delete
+
+`curl -X DELETE http://localhost:8080/polls/5a4af686f58b79cb94162193?key=abc123`
+
 ## mongodの起動
 
 ```console
