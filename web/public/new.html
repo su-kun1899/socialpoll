@@ -32,7 +32,7 @@
         form.submit(function(e){
           e.preventDefault();
           var title = form.find("input[id='title']").val();
-          var options = from.find("input[id='options]'").val();
+          var options = form.find("input[id='options']").val();
           options = options.split(",");
           for (var opt in options) {
             options[opt] = options[opt].trim();

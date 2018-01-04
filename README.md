@@ -1,5 +1,50 @@
 # socialpoll
 
+## システムの実行
+
+### NSQ
+
+`nsqlookupd`
+`nsqd --lookupd-tcp-address=localhost:4160`
+
+### MongoDB
+
+`mongod --dbpath ./db`
+
+### counter
+
+```
+cd counter
+go install
+counter
+```
+
+### twittervotes
+
+```
+cd twittervotes
+go install
+twittervotes
+```
+
+### api
+
+```
+cd api
+go install
+api
+```
+
+### web
+
+```
+cd web
+go install
+web
+```
+
+`http://localhost:8081`
+
 ## API
 
 `?key=abc123`
